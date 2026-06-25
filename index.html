@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Texas Pottery | Calm Pottery Classes & Studio Experiences</title>
+  <meta name="description" content="A reusable conversion-focused pottery studio mockup with a calm brand refresh and a streamlined Singenuity-style booking popup." />
+  <style>
+    :root {
+      --ink: #171510;
+      --coal: #26231e;
+      --clay: #9f6f47;
+      --terra: #c8834b;
+      --sand: #f4ead9;
+      --cream: #fffaf1;
+      --sage: #6f8067;
+      --moss: #2e4b31;
+      --gold: #d5a84f;
+      --line: rgba(38,35,30,.14);
+      --shadow: 0 24px 70px rgba(38, 28, 18, .18);
+      --soft-shadow: 0 16px 38px rgba(38, 28, 18, .12);
+      --radius-lg: 34px;
+      --radius-md: 22px;
+      --radius-sm: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 4%, rgba(213,168,79,.22), transparent 28rem),
+        radial-gradient(circle at 88% 12%, rgba(111,128,103,.16), transparent 24rem),
+        linear-gradient(180deg, #fbf5ea 0%, #f4ead9 46%, #efe2cf 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body.modal-open { overflow: hidden; }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { display: block; max-width: 100%; }
+
+    .site-shell { overflow: hidden; }
+
+    .container {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--moss);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 99px;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 850;
+      letter-spacing: -.01em;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      font-family: inherit;
+      font-size: .98rem;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #fffaf1;
+      background: linear-gradient(135deg, var(--moss), #203a27);
+      box-shadow: 0 16px 32px rgba(46,75,49,.25);
+    }
+
+    .btn-primary:hover { box-shadow: 0 18px 38px rgba(46,75,49,.34); }
+
+    .btn-secondary {
+      color: var(--ink);
+      background: rgba(255,250,241,.78);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 26px rgba(38, 28, 18, .08);
+    }
+
+    .btn-light {
+      color: var(--ink);
+      background: var(--cream);
+      border: 1px solid rgba(255,255,255,.6);
+    }
+
+    header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 30;
+      transition: background .2s ease, box-shadow .2s ease, backdrop-filter .2s ease;
+    }
+
+    header.scrolled {
+      background: rgba(255,250,241,.82);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 12px 40px rgba(38,28,18,.08);
+    }
+
+    .nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+      font-size: 1.18rem;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff4df;
+      border: 1px solid rgba(213,168,79,.35);
+      box-shadow: 0 10px 24px rgba(80,52,29,.12);
+    }
+
+    .brand-mark svg { width: 34px; height: 34px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: rgba(23,21,16,.72);
+      font-size: .95rem;
+      font-weight: 760;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    .hero {
+      position: relative;
+      padding: 132px 0 76px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(450px, 1.1fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      margin: 16px 0 18px;
+      font-size: clamp(3.1rem, 7vw, 6.6rem);
+      line-height: .87;
+      letter-spacing: -.08em;
+      max-width: 720px;
+    }
+
+    .hero p {
+      margin: 0 0 26px;
+      color: rgba(23,21,16,.72);
+      font-size: clamp(1.08rem, 1.8vw, 1.28rem);
+      line-height: 1.65;
+      max-width: 620px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 620px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,250,241,.56);
+      border: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.24rem;
+      letter-spacing: -.04em;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(23,21,16,.62);
+      font-size: .86rem;
+      line-height: 1.35;
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 620px;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 20px 0 0 30px;
+      overflow: hidden;
+      border-radius: 44px;
+      box-shadow: var(--shadow);
+      background: #d9c7af;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(23,21,16,.08), rgba(23,21,16,0));
+    }
+
+    .floating-card {
+      position: absolute;
+      left: 0;
+      bottom: 24px;
+      width: min(380px, 88%);
+      padding: 20px;
+      background: rgba(255,250,241,.9);
+      border: 1px solid rgba(255,255,255,.68);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .floating-card strong {
+      display: block;
+      font-size: 1.18rem;
+      letter-spacing: -.04em;
+      margin-bottom: 6px;
+    }
+
+    .floating-card p {
+      margin: 0;
+      font-size: .94rem;
+      line-height: 1.55;
+    }
+
+    .conversion-strip {
+      position: relative;
+      z-index: 3;
+      padding: 18px;
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: 28px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      box-shadow: var(--shadow);
+      margin-top: 10px;
+    }
+
+    .conversion-strip p {
+      margin: 0;
+      color: rgba(255,250,241,.78);
+      line-height: 1.55;
+    }
+
+    .conversion-strip strong {
+      color: var(--gold);
+    }
+
+    section { padding: 82px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 34px;
+    }
+
+    .section-head h2 {
+      margin: 12px 0 0;
+      font-size: clamp(2.25rem, 4.4vw, 4.5rem);
+      line-height: .95;
+      letter-spacing: -.07em;
+      max-width: 760px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: rgba(23,21,16,.68);
+      line-height: 1.65;
+      max-width: 430px;
+    }
+
+    .class-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .class-card {
+      background: rgba(255,250,241,.72);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .class-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .class-card-content { padding: 22px; }
+
+    .class-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.45rem;
+      letter-spacing: -.045em;
+    }
+
+    .class-card p {
+      margin: 0 0 18px;
+      color: rgba(23,21,16,.68);
+      line-height: 1.55;
+    }
+
+    .class-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      background: rgba(213,168,79,.16);
+      color: #6c4a22;
+      font-size: .82rem;
+      font-weight: 800;
+    }
+
+    .schedule {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      border: 1px solid var(--line);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .schedule-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .schedule-top h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      letter-spacing: -.045em;
+    }
+
+    .date-tabs {
+      display: flex;
+      gap: 8px;
+      overflow: auto;
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+    }
+
+    .date-tab {
+      min-width: 106px;
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      background: #fffaf1;
+      border-radius: 16px;
+      text-align: left;
+      cursor: pointer;
+      color: var(--ink);
+      font-family: inherit;
+    }
+
+    .date-tab.active {
+      background: var(--moss);
+      color: var(--cream);
+      border-color: var(--moss);
+      box-shadow: 0 12px 28px rgba(46,75,49,.22);
+    }
+
+    .date-tab span {
+      display: block;
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      opacity: .68;
+      font-weight: 850;
+    }
+
+    .date-tab strong {
+      display: block;
+      margin-top: 3px;
+      font-size: 1.05rem;
+    }
+
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .time-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fffaf1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .time-card:hover,
+    .time-card.active {
+      border-color: rgba(46,75,49,.48);
+      background: rgba(111,128,103,.11);
+    }
+
+    .time-card small {
+      display: block;
+      color: rgba(23,21,16,.58);
+      font-weight: 800;
+      margin-top: 3px;
+    }
+
+    .time-card em {
+      font-style: normal;
+      color: var(--moss);
+      font-size: .78rem;
+      font-weight: 900;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .story-image {
+      border-radius: 42px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #d9c7af;
+    }
+
+    .story-image img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .story-copy h2 {
+      margin: 12px 0 18px;
+      font-size: clamp(2.4rem, 4.8vw, 4.9rem);
+      line-height: .93;
+      letter-spacing: -.075em;
+    }
+
+    .story-copy p {
+      color: rgba(23,21,16,.72);
+      line-height: 1.75;
+      font-size: 1.05rem;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 15px;
+      border-radius: 18px;
+      background: rgba(255,250,241,.62);
+      border: 1px solid var(--line);
+    }
+
+    .feature-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(213,168,79,.2);
+    }
+
+    .feature strong { display: block; margin-bottom: 4px; }
+    .feature span { color: rgba(23,21,16,.66); line-height: 1.5; }
+
+    .booking-preview {
+      border-radius: 42px;
+      background: linear-gradient(135deg, var(--coal), #15130f);
+      color: var(--cream);
+      padding: 34px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .booking-preview h2 {
+      margin: 12px 0 14px;
+      font-size: clamp(2.25rem, 4.8vw, 4.7rem);
+      line-height: .94;
+      letter-spacing: -.07em;
+    }
+
+    .booking-preview p {
+      color: rgba(255,250,241,.74);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    .mock-browser {
+      overflow: hidden;
+      border-radius: 28px;
+      background: var(--cream);
+      color: var(--ink);
+      box-shadow: 0 26px 70px rgba(0,0,0,.24);
+    }
+
+    .mock-bar {
+      height: 50px;
+      background: #f0e2ce;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 16px;
+      border-bottom: 1px solid rgba(38,35,30,.1);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #cf7c56; }
+    .dot:nth-child(2) { background: #d7b85b; }
+    .dot:nth-child(3) { background: #758d6a; }
+
+    .mock-content { padding: 20px; }
+
+    .mock-step {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(38,35,30,.09);
+    }
+
+    .mock-step:last-child { border-bottom: 0; }
+
+    .mock-step strong { display: block; }
+    .mock-step span { color: rgba(23,21,16,.56); font-size: .9rem; }
+
+    footer {
+      padding: 46px 0;
+      color: rgba(23,21,16,.66);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(12,10,7,.62);
+      backdrop-filter: blur(12px);
+    }
+
+    .booking-modal {
+      position: relative;
+      z-index: 1;
+      width: min(1080px, 100%);
+      max-height: min(92vh, 820px);
+      overflow: hidden;
+      border-radius: 32px;
+      background: var(--cream);
+      box-shadow: 0 34px 100px rgba(0,0,0,.35);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(330px, .95fr);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 3;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,250,241,.88);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 1.3rem;
+      box-shadow: 0 10px 24px rgba(0,0,0,.1);
+    }
+
+    .modal-main {
+      padding: 28px;
+      overflow: auto;
+    }
+
+    .modal-main h2 {
+      margin: 10px 0 8px;
+      font-size: clamp(2rem, 3.6vw, 3.7rem);
+      line-height: .95;
+      letter-spacing: -.07em;
+    }
+
+    .modal-main > p {
+      margin: 0 0 22px;
+      color: rgba(23,21,16,.65);
+      line-height: 1.55;
+      max-width: 620px;
+    }
+
+    .progress {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 18px 0 20px;
+    }
+
+    .progress span {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: #f1e2ce;
+      color: rgba(23,21,16,.58);
+      text-align: center;
+      font-size: .82rem;
+      font-weight: 850;
+    }
+
+    .progress span.active {
+      background: var(--moss);
+      color: var(--cream);
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .booking-choice,
+    .seat-btn {
+      border: 1px solid var(--line);
+      background: #fffaf1;
+      border-radius: 18px;
+      padding: 14px;
+      color: var(--ink);
+      font: inherit;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .booking-choice.active,
+    .seat-btn.active {
+      background: rgba(111,128,103,.13);
+      border-color: rgba(46,75,49,.42);
+      box-shadow: inset 0 0 0 1px rgba(46,75,49,.18);
+    }
+
+    .booking-choice strong,
+    .seat-btn strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .booking-choice span,
+    .seat-btn span {
+      display: block;
+      color: rgba(23,21,16,.58);
+      font-size: .86rem;
+      line-height: 1.35;
+    }
+
+    .modal-side {
+      background:
+        linear-gradient(180deg, rgba(23,21,16,.34), rgba(23,21,16,.78)),
+        url("assets/pottery-wheel-closeup.png") center / cover;
+      color: var(--cream);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 620px;
+    }
+
+    .side-card {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255,250,241,.12);
+      border: 1px solid rgba(255,250,241,.18);
+      backdrop-filter: blur(16px);
+    }
+
+    .side-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.55rem;
+      letter-spacing: -.04em;
+    }
+
+    .summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,250,241,.16);
+      color: rgba(255,250,241,.78);
+    }
+
+    .summary-row:last-child { border-bottom: 0; }
+
+    .summary-row strong { color: var(--cream); }
+
+    .booking-note {
+      color: rgba(255,250,241,.76);
+      line-height: 1.6;
+      margin: 16px 0 0;
+      font-size: .94rem;
+    }
+
+    .side-bottom .btn { width: 100%; }
+
+    .fine-print {
+      color: rgba(255,250,241,.62);
+      font-size: .8rem;
+      line-height: 1.45;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .hero-grid,
+      .story-grid,
+      .booking-preview,
+      .booking-modal {
+        grid-template-columns: 1fr;
+      }
+      .hero-art { min-height: 520px; }
+      .class-grid { grid-template-columns: 1fr; }
+      .time-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section-head { display: block; }
+      .section-head p { margin-top: 14px; }
+      .modal-side { min-height: 460px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 24px, 1180px); }
+      .nav { height: 72px; }
+      .brand span { display: none; }
+      .hero { padding-top: 108px; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .hero-art { min-height: 390px; }
+      .hero-photo { inset: 0; border-radius: 28px; }
+      .floating-card { left: 12px; bottom: 12px; }
+      .conversion-strip { grid-template-columns: 1fr; }
+      section { padding: 58px 0; }
+      .time-grid,
+      .modal-grid {
+        grid-template-columns: 1fr;
+      }
+      .booking-preview { padding: 22px; border-radius: 28px; }
+      .booking-modal { max-height: 94vh; }
+      .modal-main { padding: 22px; }
+      .modal-side { padding: 22px; min-height: auto; }
+      .progress { grid-template-columns: 1fr; }
+      .footer-inner { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header id="siteHeader">
+      <div class="container nav">
+        <a class="brand" href="#top" aria-label="Texas Pottery home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 28c0 12 7 23 16 23s16-11 16-23H16Z" fill="#9F6F47"/>
+              <path d="M20 28c1 7 6 13 12 13s11-6 12-13" stroke="#FFF4DF" stroke-width="3" stroke-linecap="round"/>
+              <path d="M21 24c0-6 5-11 11-11s11 5 11 11" stroke="#2E4B31" stroke-width="4" stroke-linecap="round"/>
+              <path d="M12 52h40" stroke="#D5A84F" stroke-width="4" stroke-linecap="round"/>
+              <path d="M25 19c3 2 10 2 14 0" stroke="#F4EAD9" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span>Texas Pottery</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#classes">Classes</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#story">Studio</a>
+          <a href="#booking-flow">Booking Flow</a>
+        </nav>
+        <button class="btn btn-primary js-open-booking">Book a Class</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow">Texas pottery classes</span>
+            <h1>Make something with your hands.</h1>
+            <p>Learn the ancient craft of wheel-thrown pottery in a peaceful Texas studio. Small classes, patient instruction, and a booking flow that gets guests from curious to confirmed in a few clicks.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary js-open-booking">Book Your Wheel</button>
+              <a class="btn btn-secondary" href="#classes">Explore classes</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat">
+                <strong>9 wheels</strong>
+                <span>Small classes with personal attention.</span>
+              </div>
+              <div class="stat">
+                <strong>2 hours</strong>
+                <span>Enough time to learn, create, and relax.</span>
+              </div>
+              <div class="stat">
+                <strong>BYOB</strong>
+                <span>Bring your favorite drink and settle in.</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-art" aria-label="Students learning pottery in a warm studio">
+            <div class="hero-photo">
+              <img src="assets/pottery-class-hero.png" alt="Adults learning pottery on the wheel in a warm studio" />
+            </div>
+            <div class="floating-card">
+              <strong>A calmer way to book.</strong>
+              <p>No giant wall of time-slot blocks. Guests choose class, date, seats, and checkout inside one focused popup.</p>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="conversion-strip">
+            <p><strong>Singenuity-style booking flow:</strong> fewer distractions, clearer availability, cleaner checkout, and conversion-focused analytics built to help double booking conversion versus clunky product grids.</p>
+            <button class="btn btn-light js-open-booking">See the popup</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="classes">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Choose your clay path</span>
+              <h2>Classes that feel clear before guests click.</h2>
+            </div>
+            <p>The current site lists each time slot as a separate product. This mockup groups experiences first, then lets guests pick the time inside a streamlined booking flow.</p>
+          </div>
+
+          <div class="class-grid">
+            <article class="class-card">
+              <img src="assets/pottery-wheel-closeup.png" alt="Close-up of a student learning to shape clay on a pottery wheel" />
+              <div class="class-card-content">
+                <h3>2 HR Wheel</h3>
+                <p>A beginner-friendly wheel class where each guest learns to make bowls and keeps two pieces after firing.</p>
+                <div class="class-meta">
+                  <span class="pill">$100</span>
+                  <span class="pill">2 hours</span>
+                  <span class="pill">Beginner friendly</span>
+                </div>
+                <button class="btn btn-primary js-open-booking">Book this class</button>
+              </div>
+            </article>
+
+            <article class="class-card">
+              <img src="assets/pottery-class-hero.png" alt="Friends enjoying a pottery class in a warm ceramic studio" />
+              <div class="class-card-content">
+                <h3>Private Groups</h3>
+                <p>Private events for friends, families, birthdays, and creative group nights with a calmer planning path.</p>
+                <div class="class-meta">
+                  <span class="pill">Groups</span>
+                  <span class="pill">BYOB</span>
+                  <span class="pill">Custom times</span>
+                </div>
+                <button class="btn btn-primary js-open-booking">Plan a group</button>
+              </div>
+            </article>
+
+            <article class="class-card">
+              <img src="assets/pottery-wheel-closeup.png" alt="Hands shaping clay during a pottery class" />
+              <div class="class-card-content">
+                <h3>Team Building</h3>
+                <p>A hands-on studio experience for teams that want something memorable, slow, and human.</p>
+                <div class="class-meta">
+                  <span class="pill">Corporate</span>
+                  <span class="pill">Creative</span>
+                  <span class="pill">Small teams</span>
+                </div>
+                <button class="btn btn-primary js-open-booking">Request time</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="schedule">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Clean availability</span>
+              <h2>One schedule. Not fifty product blocks.</h2>
+            </div>
+            <p>Instead of forcing guests to scan huge repetitive blocks, availability is grouped by date with simple time cards and live seat counts.</p>
+          </div>
+
+          <div class="schedule">
+            <div class="schedule-top">
+              <h3>Upcoming 2 HR Wheel classes</h3>
+              <button class="btn btn-secondary js-open-booking">Open full booking</button>
+            </div>
+            <div class="date-tabs" role="tablist" aria-label="Class dates">
+              <button class="date-tab active" type="button"><span>Fri</span><strong>Jun 26</strong></button>
+              <button class="date-tab" type="button"><span>Sat</span><strong>Jun 27</strong></button>
+              <button class="date-tab" type="button"><span>Sun</span><strong>Jun 28</strong></button>
+              <button class="date-tab" type="button"><span>Wed</span><strong>Jul 1</strong></button>
+              <button class="date-tab" type="button"><span>Fri</span><strong>Jul 3</strong></button>
+            </div>
+            <div class="time-grid">
+              <button class="time-card active" type="button">
+                <span><strong>6:00 PM</strong><small>2 HR Wheel</small></span>
+                <em>4 left</em>
+              </button>
+              <button class="time-card" type="button">
+                <span><strong>12:00 PM</strong><small>Weekend wheel</small></span>
+                <em>7 left</em>
+              </button>
+              <button class="time-card" type="button">
+                <span><strong>3:00 PM</strong><small>Weekend wheel</small></span>
+                <em>3 left</em>
+              </button>
+              <button class="time-card" type="button">
+                <span><strong>6:00 PM</strong><small>Evening wheel</small></span>
+                <em>6 left</em>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="story">
+        <div class="container story-grid">
+          <div class="story-image">
+            <img src="assets/pottery-class-hero.png" alt="A welcoming pottery studio class with students at pottery wheels" />
+          </div>
+          <div class="story-copy">
+            <span class="eyebrow">Meet the maker</span>
+            <h2>Guided by patient makers.</h2>
+            <p>Texas Pottery is a flexible studio concept for pottery schools, ceramic artists, and creative experience operators who want their website to feel as calm as the class itself.</p>
+            <p>This mockup keeps the handmade spirit, then removes friction from the website: clearer class categories, warmer storytelling, stronger calls to action, and a booking popup that feels easy instead of overwhelming.</p>
+            <div class="feature-list">
+              <div class="feature">
+                <span class="feature-icon">✦</span>
+                <div><strong>Calm visual identity</strong><span>Earthy colors, softer spacing, and a logo inspired by a bowl, wheel, and quiet studio craft.</span></div>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">◌</span>
+                <div><strong>Conversion-focused flow</strong><span>Guests see availability, seats, price, and next step without getting lost in the shop grid.</span></div>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">↗</span>
+                <div><strong>Better data story</strong><span>The popup creates a cleaner path for tracking where guests drop off and what drives bookings.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="booking-flow">
+        <div class="container booking-preview">
+          <div>
+            <span class="eyebrow">Singenuity booking popup</span>
+            <h2>Designed to turn interest into booked seats.</h2>
+            <p>The goal is simple: stop making guests interpret a store catalog. Let them pick a class, choose a date, see available seats, and checkout inside a focused flow built for conversion.</p>
+            <button class="btn btn-light js-open-booking">Launch booking demo</button>
+          </div>
+          <div class="mock-browser" aria-hidden="true">
+            <div class="mock-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="mock-content">
+              <div class="mock-step"><div><strong>1. Choose class</strong><span>2 HR Wheel - $100</span></div><span>✓</span></div>
+              <div class="mock-step"><div><strong>2. Pick date/time</strong><span>Fri Jun 26, 6:00 PM</span></div><span>✓</span></div>
+              <div class="mock-step"><div><strong>3. Seats & checkout</strong><span>2 guests, instant confirmation</span></div><span>→</span></div>
+              <div class="mock-step"><div><strong>Marketing data</strong><span>Cleaner funnel, cleaner attribution</span></div><span>↗</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 28c0 12 7 23 16 23s16-11 16-23H16Z" fill="#9F6F47"/>
+              <path d="M20 28c1 7 6 13 12 13s11-6 12-13" stroke="#FFF4DF" stroke-width="3" stroke-linecap="round"/>
+              <path d="M21 24c0-6 5-11 11-11s11 5 11 11" stroke="#2E4B31" stroke-width="4" stroke-linecap="round"/>
+              <path d="M12 52h40" stroke="#D5A84F" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span>Texas Pottery</span>
+        </div>
+        <p>Reusable pottery studio mockup for Texas operators · Built to demonstrate a cleaner booking experience.</p>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle" aria-hidden="true">
+    <div class="modal-backdrop js-close-booking"></div>
+    <div class="booking-modal">
+      <button class="modal-close js-close-booking" aria-label="Close booking popup">×</button>
+      <div class="modal-main">
+        <span class="eyebrow">Book with Singenuity</span>
+        <h2 id="bookingTitle">Reserve your pottery wheel.</h2>
+        <p>This popup shows how a cleaner flow can replace the clunky time-slot grid: fewer decisions, clearer urgency, and a faster path to checkout.</p>
+
+        <div class="progress" aria-label="Booking steps">
+          <span class="active">1. Class</span>
+          <span class="active">2. Time</span>
+          <span>3. Checkout</span>
+        </div>
+
+        <div class="modal-grid" aria-label="Class selection">
+          <button class="booking-choice active" type="button" data-class="2 HR Wheel" data-price="100" data-pricing="per-seat">
+            <strong>2 HR Wheel</strong>
+            <span>$100 · beginner friendly</span>
+          </button>
+          <button class="booking-choice" type="button" data-class="Private Group" data-price="450" data-pricing="flat">
+            <strong>Private Group</strong>
+            <span>Custom time · request flow</span>
+          </button>
+          <button class="booking-choice" type="button" data-class="Team Building" data-price="650" data-pricing="flat">
+            <strong>Team Building</strong>
+            <span>For creative teams</span>
+          </button>
+        </div>
+
+        <div class="date-tabs" aria-label="Booking date selection">
+          <button class="date-tab active booking-date" type="button" data-date="Fri, Jun 26"><span>Fri</span><strong>Jun 26</strong></button>
+          <button class="date-tab booking-date" type="button" data-date="Sat, Jun 27"><span>Sat</span><strong>Jun 27</strong></button>
+          <button class="date-tab booking-date" type="button" data-date="Sun, Jun 28"><span>Sun</span><strong>Jun 28</strong></button>
+          <button class="date-tab booking-date" type="button" data-date="Wed, Jul 1"><span>Wed</span><strong>Jul 1</strong></button>
+        </div>
+
+        <div class="time-grid" aria-label="Booking time selection">
+          <button class="time-card active booking-time" type="button" data-time="6:00 PM" data-left="4">
+            <span><strong>6:00 PM</strong><small>2 HR Wheel</small></span>
+            <em>4 left</em>
+          </button>
+          <button class="time-card booking-time" type="button" data-time="12:00 PM" data-left="7">
+            <span><strong>12:00 PM</strong><small>Weekend wheel</small></span>
+            <em>7 left</em>
+          </button>
+          <button class="time-card booking-time" type="button" data-time="3:00 PM" data-left="3">
+            <span><strong>3:00 PM</strong><small>Weekend wheel</small></span>
+            <em>3 left</em>
+          </button>
+          <button class="time-card booking-time" type="button" data-time="6:00 PM" data-left="6">
+            <span><strong>6:00 PM</strong><small>Evening wheel</small></span>
+            <em>6 left</em>
+          </button>
+        </div>
+
+        <h3 style="margin:22px 0 10px; letter-spacing:-.04em;">How many seats?</h3>
+        <div class="modal-grid" aria-label="Seat selection">
+          <button class="seat-btn active" type="button" data-seats="1"><strong>1 guest</strong><span>Solo creative reset</span></button>
+          <button class="seat-btn" type="button" data-seats="2"><strong>2 guests</strong><span>Date night or friend pair</span></button>
+          <button class="seat-btn" type="button" data-seats="4"><strong>4 guests</strong><span>Small group</span></button>
+        </div>
+      </div>
+
+      <aside class="modal-side">
+        <div class="side-card">
+          <h3>Your class</h3>
+          <div class="summary-row"><span>Experience</span><strong id="summaryClass">2 HR Wheel</strong></div>
+          <div class="summary-row"><span>Date</span><strong id="summaryDate">Fri, Jun 26</strong></div>
+          <div class="summary-row"><span>Time</span><strong id="summaryTime">6:00 PM</strong></div>
+          <div class="summary-row"><span>Seats</span><strong id="summarySeats">1</strong></div>
+          <div class="summary-row"><span>Total</span><strong id="summaryTotal">$100</strong></div>
+          <p class="booking-note">Designed to double conversion with a simpler booking path, clearer availability, and cleaner marketing data than a wall of clunky product blocks.</p>
+        </div>
+
+        <div class="side-bottom">
+          <a class="btn btn-light" href="https://singenuity.com" target="_blank" rel="noopener">Continue to checkout demo</a>
+          <p class="fine-print">Demo button opens Singenuity.com. In production, this would complete the booking inside the popup or route to the connected checkout.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const header = document.getElementById('siteHeader');
+    const modal = document.getElementById('bookingModal');
+    const openButtons = document.querySelectorAll('.js-open-booking');
+    const closeButtons = document.querySelectorAll('.js-close-booking');
+    const classChoices = document.querySelectorAll('.booking-choice');
+    const dateChoices = document.querySelectorAll('.booking-date');
+    const timeChoices = document.querySelectorAll('.booking-time');
+    const seatChoices = document.querySelectorAll('.seat-btn');
+    const summary = {
+      className: document.getElementById('summaryClass'),
+      date: document.getElementById('summaryDate'),
+      time: document.getElementById('summaryTime'),
+      seats: document.getElementById('summarySeats'),
+      total: document.getElementById('summaryTotal')
+    };
+
+    let bookingState = {
+      className: '2 HR Wheel',
+      price: 100,
+      pricing: 'per-seat',
+      date: 'Fri, Jun 26',
+      time: '6:00 PM',
+      seats: 1
+    };
+
+    function updateHeader() {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }
+
+    function openModal() {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+
+    function setActive(buttons, selected) {
+      buttons.forEach(button => button.classList.toggle('active', button === selected));
+    }
+
+    function updateSummary() {
+      summary.className.textContent = bookingState.className;
+      summary.date.textContent = bookingState.date;
+      summary.time.textContent = bookingState.time;
+      summary.seats.textContent = bookingState.seats;
+      const total = bookingState.pricing === 'flat' ? bookingState.price : bookingState.price * bookingState.seats;
+      summary.total.textContent = bookingState.pricing === 'flat'
+        ? '$' + total.toLocaleString() + ' package'
+        : '$' + total.toLocaleString();
+    }
+
+    window.addEventListener('scroll', updateHeader);
+    updateHeader();
+
+    openButtons.forEach(button => button.addEventListener('click', openModal));
+    closeButtons.forEach(button => button.addEventListener('click', closeModal));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeModal();
+    });
+
+    classChoices.forEach(button => {
+      button.addEventListener('click', () => {
+        setActive(classChoices, button);
+        bookingState.className = button.dataset.class;
+        bookingState.price = Number(button.dataset.price);
+        bookingState.pricing = button.dataset.pricing || 'per-seat';
+        updateSummary();
+      });
+    });
+
+    dateChoices.forEach(button => {
+      button.addEventListener('click', () => {
+        setActive(dateChoices, button);
+        bookingState.date = button.dataset.date;
+        updateSummary();
+      });
+    });
+
+    timeChoices.forEach(button => {
+      button.addEventListener('click', () => {
+        setActive(timeChoices, button);
+        bookingState.time = button.dataset.time;
+        updateSummary();
+      });
+    });
+
+    seatChoices.forEach(button => {
+      button.addEventListener('click', () => {
+        setActive(seatChoices, button);
+        bookingState.seats = Number(button.dataset.seats);
+        updateSummary();
+      });
+    });
+  </script>
+</body>
+</html>
